@@ -1,0 +1,33 @@
+{
+    "name": "nerdost/simple-log404",
+    "type": "typo3-cms-extension",
+    "description": "",
+    "authors": [
+        {
+            "name": "Paul Beck",
+            "role": "Developer"
+        }
+    ],
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "typo3/cms-core": "^9.5||^10.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nerdost\\SimpleLog404\\": "Classes"
+        }
+    },
+    "replace": {
+        "typo3-ter/log404": "self.version"
+    },
+    "config": {
+        "vendor-dir": ".Build/vendor",
+        "bin-dir": ".Build/bin"
+    },
+    "extra": {
+        "typo3/cms": {
+            "cms-package-dir": "{$vendor-dir}/typo3/cms",
+            "web-dir": ".Build/public"
+        }
+    }
+}

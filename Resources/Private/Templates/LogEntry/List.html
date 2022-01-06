@@ -1,0 +1,46 @@
+<html
+        xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+        xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+        data-namespace-typo3-fluid="true">
+
+
+<f:be.container>
+    <div class="module-body t3js-module-body">
+
+        <h1>Logged 404 Errors handled by PageErrorHandler</h1>
+
+        <table class="tx_simplelog404 table table-striped">
+            <tr>
+                <th>
+                    Request URL
+                </th>
+                <th>
+                    <f:translate key="tx_simplelog404_domain_model_logentry.message"/>
+                </th>
+                <th>
+                    <f:translate key="tx_simplelog404_domain_model_logentry.hitcount"/>
+                </th>
+                <th>
+                    Last hit
+                </th>
+            </tr>
+            <f:for each="{logEntries}" as="logEntry">
+                <tr>
+                    <td>
+                        {logEntry.requesturl}
+                    </td>
+                    <td>
+                        {logEntry.message}
+                    </td>
+                    <td>
+                        {logEntry.hitcount}
+                    </td>
+                    <td>
+                        <f:format.date format="d.m.Y H:i">{logEntry.lasthit}</f:format.date>
+                    </td>
+                </tr>
+            </f:for>
+        </table>
+    </div>
+</f:be.container>
+</html>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="EXT:simple_log404/Resources/Private/Language/locallang_csh_tx_simplelog404_domain_model_logentry.xlf" date="2022-01-06T14:14:42Z" product-name="log404">
+		<header/>
+		<body>
+			<trans-unit id="requesturl.description" resname="requesturl.description">
+				<source>requesturl</source>
+			</trans-unit>
+			<trans-unit id="statuscode.description" resname="statuscode.description">
+				<source>statuscode</source>
+			</trans-unit>
+			<trans-unit id="message.description" resname="message.description">
+				<source>message</source>
+			</trans-unit>
+			<trans-unit id="hitcount.description" resname="hitcount.description">
+				<source>hitcount</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

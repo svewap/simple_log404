@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="EXT:simple_log404/Resources/Private/Language/locallang.xlf" date="2022-01-06T14:14:42Z" product-name="log404">
+		<header/>
+		<body>
+			<trans-unit id="tx_simplelog404_domain_model_logentry" resname="tx_simplelog404_domain_model_logentry">
+				<source>Log Entry</source>
+			</trans-unit>
+			<trans-unit id="tx_simplelog404_domain_model_logentry.requesturl" resname="tx_simplelog404_domain_model_logentry.requesturl">
+				<source>Requesturl</source>
+			</trans-unit>
+			<trans-unit id="tx_simplelog404_domain_model_logentry.statuscode" resname="tx_simplelog404_domain_model_logentry.statuscode">
+				<source>Statuscode</source>
+			</trans-unit>
+			<trans-unit id="tx_simplelog404_domain_model_logentry.message" resname="tx_simplelog404_domain_model_logentry.message">
+				<source>Message</source>
+			</trans-unit>
+			<trans-unit id="tx_simplelog404_domain_model_logentry.hitcount" resname="tx_simplelog404_domain_model_logentry.hitcount">
+				<source>Hitcount</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
