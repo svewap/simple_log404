@@ -1,8 +1,14 @@
 <?php
+
 namespace Nerdost\SimpleLog404\Error\PageErrorHandler;
 
-use Psr\Http\Message\ServerRequestInterface;
+use Doctrine\DBAL\DBALException;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\Query\QueryBuilder;
+use TYPO3\CMS\Core\Http\NormalizedParams;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class PageContentErrorHandler extends \TYPO3\CMS\Core\Error\PageErrorHandler\PageContentErrorHandler
 {
@@ -12,24 +18,23 @@ class PageContentErrorHandler extends \TYPO3\CMS\Core\Error\PageErrorHandler\Pag
      * @param string $message
      * @param array $reasons
      * @return ResponseInterface
-     * @throws \RuntimeException
-     * @throws NoSuchCacheException
+     * @throws DBALException
      */
     public function handlePageError(ServerRequestInterface $request, string $message, array $reasons = []): ResponseInterface
     {
-        /** @var \TYPO3\CMS\Core\Http\NormalizedParams $params */
+        /** @var NormalizedParams $params */
         $params = $request->getAttributes()['normalizedParams'];
         $requestUri = $params->getRequestUrl();
 
-        $qb = self::getQueryBuilder();
+        $qb = $this->getQueryBuilder();
         $logEntry = $qb->select('*')->from('tx_simplelog404_domain_model_logentry')
             ->where(
                 $qb->expr()->eq('requesturl', $qb->createNamedParameter($requestUri))
             )->execute()->fetch();
 
-        $qb = self::getQueryBuilder();
+        $qb = $this->getQueryBuilder();
 
-        if(false === $logEntry) {
+        if (false === $logEntry) {
             $qb->insert('tx_simplelog404_domain_model_logentry')
                 ->values([
                     'requesturl' => $requestUri,
@@ -39,7 +44,7 @@ class PageContentErrorHandler extends \TYPO3\CMS\Core\Error\PageErrorHandler\Pag
                     'hitcount' => 1
                 ])->execute();
         } else {
-            $hitCount = (int) $logEntry['hitcount'] + 1;
+            $hitCount = (int)$logEntry['hitcount'] + 1;
             $qb->update('tx_simplelog404_domain_model_logentry')
                 ->set('lasthit', time())
                 ->set('hitcount', $hitCount)
@@ -53,10 +58,11 @@ class PageContentErrorHandler extends \TYPO3\CMS\Core\Error\PageErrorHandler\Pag
     }
 
     /**
-     * @return \TYPO3\CMS\Core\Database\Query\QueryBuilder
+     * @return QueryBuilder
      */
-    protected function getQueryBuilder() {
-        return \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Database\ConnectionPool::class)
+    protected function getQueryBuilder()
+    {
+        return GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('tx_simplelog404_domain_model_logentry');
     }
 }
